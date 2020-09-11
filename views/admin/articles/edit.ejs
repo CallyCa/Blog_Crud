@@ -6,7 +6,7 @@
     <div class="card">
 
         <div class="card-header">
-            <h2>Novo Artigo</h2>
+            <h2>Editar Artigo</h2>
         </div>
 
         <div class="card-body">
@@ -19,14 +19,17 @@
                    <% }) %>
 
                 </select>
-                <textarea class="form-control" placeholder="Escreva seu artigo" name="body" id="article"></textarea><br>
-                <button class="btn btn-success">Cadastrar</button>
+                <textarea class="form-control" placeholder="Escreva seu artigo" name="body" id="article"><%- article.body %></textarea><br>
+                <button class="btn btn-success">Atualizar</button>
             </form>
         </div>
-        
-
     </div>
-</div>>
+</div>
+
+<div id="content" style="display: none;">
+    <%- article.body %>
+
+</div>
 
 
 <%- include ("../../partials/footer.ejs"); %>
@@ -36,6 +39,11 @@
         language: 'pt_BR',
         selector: "#article",
         plugins: [
-        'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons']
+        'advlist autolink link image lists print preview hr searchreplace wordcount fullscreen insertdatetime media save table paste emoticons'
+        ],
+        init_instance_callback: () => {
+            tinymce.get("article").setContent($("#content").html())
+
+        }
     })
 </script>
